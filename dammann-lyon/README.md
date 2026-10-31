@@ -2,6 +2,14 @@
 
 Maquette de refonte de dammannfreres-lyon.fr : charte noir / or / crème, feuille de thé dorée en 3D (Three.js), cartes en verre inclinables, réservation d'ateliers.
 
+**Objectif du site : orienter vers les 3 ateliers** (45 € chacun) et aider chaque visiteur à choisir le sien :
+- *Une plante, 6 couleurs* · *Du nez à la tasse* · *La diversité du Japon* — chacun avec son voyage 3D ;
+- un quiz en 4 questions qui recommande un atelier ;
+- « Offrir un atelier » : carte cadeau à 45 €, c'est la personne qui reçoit qui choisit son thème ;
+- réservation avec option « J'ai reçu un atelier en cadeau ».
+
+Contenu des ateliers, prix et questions du quiz : `js/data.js` (`ATELIERS`, `ATELIER_PRICE`, `QUIZ`).
+
 **Palette vivante** : la base reste noir et or ; chaque famille de thé apporte sa teinte (ambre, jade, miel, ivoire, rose, cuivre) qui colore la page au survol et tout le voyage.
 
 **Le Voyage** : chaque famille et chaque référence ouvre une immersion 3D en 4 étapes pilotées par le défilement — Origine (jardins en terrasses), Ingrédients (le mélange flotte autour de vous), Infusion (théière en verre, l'eau prend la couleur du thé), La tasse (notes et suite du parcours).
@@ -40,7 +48,9 @@ Ouvrir `js/data.js`, copier un bloc de `PRODUCTS`, changer le nom, la famille, l
 Ces éléments sont des **valeurs provisoires**, à remplacer par les vraies infos :
 
 - [ ] **Catalogue complet** : seules 3 références signatures sont intégrées (Goût Russe Douchka, Jardin Bleu, Jardin du Trocadéro), d'après des sources publiques. Ajouter les autres dans `js/data.js`, avec les prix
-- [ ] Ateliers : vérifier les infos reprises d'agendas en ligne (lundi 10h, jeudi 17h30, 48 €/adulte, 13 thés d'origine) — un agenda indique 3 rue Confort au lieu du 5
+- [ ] Ateliers : durée, jours et horaires, boutique où ils ont lieu, nombre de places
+- [ ] Atelier 6 couleurs : « 15 tasses » vs « 3 tasses par couleur » (6 × 3 = 18) — confirmer le nombre de plateaux
+- [ ] Carte cadeau : brancher le paiement et l'envoi (repère `À BRANCHER` dans `js/main.js`), définir la durée de validité
 - [ ] Températures et temps d'infusion : ce sont des conseils généraux par famille, à aligner sur les fiches de la Maison
 - [ ] Horaires des deux boutiques, téléphone de la boutique Frères Lumière, code postal
 - [ ] Formulaire de réservation : il valide les champs mais **n'envoie rien**. Brancher l'envoi dans `js/main.js` (repère `À BRANCHER`) — ex. Formspree, Calendly ou l'outil de réservation existant

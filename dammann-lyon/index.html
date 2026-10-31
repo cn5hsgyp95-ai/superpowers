@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dammann Frères Lyon — Créateur de thés &amp; infusions</title>
-  <meta name="description" content="Dammann Frères à Lyon : deux boutiques, rue Confort et avenue des Frères Lumière. Thés d'exception et ateliers de dégustation.">
+  <title>Ateliers dégustation — Dammann Frères Lyon</title>
+  <meta name="description" content="Trois ateliers de dégustation de thé chez Dammann Frères Lyon : Une plante 6 couleurs, Du nez à la tasse, La diversité du Japon. 45 € l'atelier, à vivre ou à offrir.">
   <meta name="theme-color" content="#0b0b0c">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,27 +13,24 @@
 </head>
 <body>
 
-  <!-- Écran de chargement -->
   <div class="loader" id="loader" aria-hidden="true">
     <span class="loader__mark">D</span>
     <span class="loader__bar"><span></span></span>
   </div>
 
-  <!-- Scène 3D (arrière-plan fixe) -->
   <canvas id="scene" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
 
-  <!-- Navigation -->
   <header class="nav" id="nav">
     <a href="#top" class="nav__brand" aria-label="Dammann Frères Lyon — accueil">
       <span class="nav__mark">D</span>
       <span class="nav__name">Dammann Frères <em>Lyon</em></span>
     </a>
     <nav class="nav__links" id="navLinks" aria-label="Navigation principale">
-      <a href="#maison">La Maison</a>
+      <a href="#ateliers">Les ateliers</a>
+      <a href="#quiz">Quel atelier ?</a>
+      <a href="#offrir">Offrir</a>
       <a href="#thes">Nos thés</a>
-      <a href="#references">Références</a>
-      <a href="#ateliers">Ateliers</a>
       <a href="#boutiques">Boutiques</a>
       <a href="#reserver" class="btn btn--gold btn--sm">Réserver</a>
     </nav>
@@ -47,24 +44,147 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero__content">
-        <p class="eyebrow reveal">Créateur de thés &amp; infusions · Depuis 1692</p>
+        <p class="eyebrow reveal">Ateliers dégustation · Dammann Frères Lyon</p>
         <h1 class="hero__title reveal">
-          <span>L'art du thé,</span>
-          <span class="gold-text">réinventé à Lyon.</span>
+          <span>Le thé se goûte.</span>
+          <span class="gold-text">Il s'apprend aussi.</span>
         </h1>
         <p class="hero__lead reveal">
-          Deux adresses, une même passion. Entrez dans l'univers Dammann Frères :
-          des feuilles d'exception, des parfums venus du monde entier et des ateliers
-          pour apprendre à les déguster.
+          Trois ateliers pour comprendre votre palais, décrypter les arômes
+          et voyager au Japon. <strong class="hero__price"><span data-price></span> € l'atelier</strong>, à vivre ou à offrir.
         </p>
         <div class="hero__cta reveal">
-          <a href="#references" class="btn btn--gold">Commencer le voyage</a>
-          <a href="#ateliers" class="btn btn--ghost">Réserver un atelier</a>
+          <a href="#quiz" class="btn btn--gold">Trouver mon atelier</a>
+          <a href="#offrir" class="btn btn--ghost">Offrir un atelier</a>
         </div>
       </div>
-      <a href="#maison" class="scroll-hint" aria-label="Défiler vers la suite">
+      <a href="#ateliers" class="scroll-hint" aria-label="Défiler vers les ateliers">
         <span>Défiler</span><i></i>
       </a>
+    </section>
+
+    <!-- LES 3 ATELIERS -->
+    <section class="section" id="ateliers">
+      <div class="section__head reveal">
+        <p class="eyebrow">Les ateliers</p>
+        <h2>Trois façons <span class="gold-text">d'entrer dans le thé</span>.</h2>
+        <p class="section__sub">Même prix pour les trois : <span data-price></span> €. Découvrez chacun en 3D, puis choisissez celui qui vous ressemble.</p>
+      </div>
+      <div class="ateliers-list" id="atelierCards"></div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="section quiz-section" id="quiz">
+      <div class="section__head reveal">
+        <p class="eyebrow">Quel atelier pour vous ?</p>
+        <h2>Quatre questions, <span class="gold-text">votre atelier</span>.</h2>
+        <p class="section__sub">Répondez à l'instinct : il n'y a pas de mauvaise réponse.</p>
+      </div>
+      <div class="quiz glass reveal" id="quizBox" aria-live="polite">
+        <div class="quiz__progress" aria-hidden="true"><span id="quizBar"></span></div>
+        <div id="quizBody"></div>
+      </div>
+    </section>
+
+    <!-- OFFRIR -->
+    <section class="section gift-section" id="offrir">
+      <div class="gift">
+        <div class="gift__intro">
+          <div class="section__head reveal">
+            <p class="eyebrow">Offrir un atelier</p>
+            <h2>Offrez l'expérience, <span class="gold-text">pas le casse-tête</span>.</h2>
+          </div>
+          <ol class="gift__steps reveal">
+            <li><strong>Vous offrez</strong> un atelier à <span data-price></span> €. Les trois ateliers sont au même prix.</li>
+            <li><strong>La personne reçoit</strong> sa carte cadeau Dammann Frères Lyon.</li>
+            <li><strong>Elle choisit elle-même</strong> le thème qui lui plaît : Une plante 6 couleurs, Du nez à la tasse ou La diversité du Japon.</li>
+          </ol>
+          <p class="gift__note reveal">Vous n'avez rien à deviner : c'est celui qui reçoit qui choisit.</p>
+        </div>
+
+        <div class="gift__card-wrap reveal" aria-hidden="true">
+          <div class="gift-card" id="giftCard">
+            <div class="gift-card__face">
+              <span class="nav__mark">D</span>
+              <p class="gift-card__label">Carte cadeau</p>
+              <p class="gift-card__title">Un atelier dégustation</p>
+              <p class="gift-card__for">Pour <span id="giftCardName">vous</span></p>
+              <p class="gift-card__price"><span data-price></span> €</p>
+              <span class="gift-card__shine"></span>
+            </div>
+          </div>
+        </div>
+
+        <form class="booking glass reveal gift__form" id="giftForm" novalidate>
+          <h3>Commander une carte cadeau</h3>
+          <div class="booking__grid booking__grid--2">
+            <label>Votre nom
+              <input type="text" name="offrant" required autocomplete="name">
+            </label>
+            <label>Votre e-mail
+              <input type="email" name="email" required autocomplete="email">
+            </label>
+            <label>Prénom de la personne
+              <input type="text" name="beneficiaire" id="giftName" required maxlength="30">
+            </label>
+            <label>Nombre d'ateliers
+              <input type="number" name="quantite" id="giftQty" min="1" max="10" value="1" required>
+            </label>
+            <label class="span-2">Votre message (facultatif)
+              <textarea name="message" rows="3" maxlength="300"></textarea>
+            </label>
+            <label class="span-2">Réception
+              <select name="reception" required>
+                <option value="email">Carte envoyée par e-mail</option>
+                <option value="boutique">À retirer en boutique</option>
+              </select>
+            </label>
+          </div>
+          <div class="gift__total">Total : <strong id="giftTotal"></strong></div>
+          <button class="btn btn--gold" type="submit">Commander la carte cadeau</button>
+          <p class="booking__msg" id="giftMsg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- RÉSERVER -->
+    <section class="section" id="reserver-section">
+      <form class="booking glass reveal" id="reserver" novalidate>
+        <p class="eyebrow">Réserver</p>
+        <h3>Réserver un atelier</h3>
+        <div class="booking__grid">
+          <label>Nom
+            <input type="text" name="nom" required autocomplete="name">
+          </label>
+          <label>E-mail
+            <input type="email" name="email" required autocomplete="email">
+          </label>
+          <label>Téléphone
+            <input type="tel" name="tel" autocomplete="tel">
+          </label>
+          <label>Atelier
+            <select name="atelier" id="atelierSelect" required>
+              <option value="">Choisir…</option>
+            </select>
+          </label>
+          <label>Date souhaitée
+            <input type="date" name="date" required>
+          </label>
+          <label>Participants
+            <input type="number" name="participants" min="1" max="12" value="2" required>
+          </label>
+          <label class="check span-3">
+            <input type="checkbox" name="cadeau" id="giftCheck">
+            <span>J'ai reçu un atelier en cadeau</span>
+          </label>
+          <label class="span-3 gift-code" id="giftCodeField" hidden>Numéro de la carte cadeau
+            <input type="text" name="code" id="giftCode" autocomplete="off">
+          </label>
+        </div>
+        <p class="booking__hint">La boutique vous recontacte pour confirmer la date.</p>
+        <button class="btn btn--gold" type="submit">Envoyer la demande</button>
+        <p class="booking__msg" id="bookingMsg" role="status" aria-live="polite"></p>
+      </form>
     </section>
 
     <!-- LA MAISON -->
@@ -82,7 +202,7 @@
         <ul class="stats">
           <li class="stat glass reveal"><strong>1692</strong><span>Année de fondation</span></li>
           <li class="stat glass reveal"><strong>2</strong><span>Boutiques à Lyon</span></li>
-          <li class="stat glass reveal"><strong>∞</strong><span>Voyages en tasse</span></li>
+          <li class="stat glass reveal"><strong>3</strong><span>Ateliers dégustation</span></li>
         </ul>
       </div>
     </section>
@@ -95,72 +215,15 @@
         <p class="section__sub">Survolez une famille pour voir sa couleur, cliquez pour partir en voyage.</p>
       </div>
       <div class="cards" id="familyCards"></div>
-      <p class="section__note reveal">Chaque famille ouvre un voyage en 3D : origine, ingrédients, infusion, dégustation.</p>
     </section>
-
 
     <!-- RÉFÉRENCES -->
     <section class="section references" id="references">
       <div class="section__head reveal">
         <p class="eyebrow">Les signatures de la Maison</p>
         <h2>Entrez <span class="gold-text">dans la tasse</span>.</h2>
-        <p class="section__sub">Chaque référence est un voyage. Choisissez la vôtre.</p>
       </div>
       <div class="products" id="productCards"></div>
-    </section>
-
-    <!-- ATELIERS -->
-    <section class="section ateliers" id="ateliers">
-      <div class="section__head reveal">
-        <p class="eyebrow">Ateliers dégustation</p>
-        <h2>Apprenez à <span class="gold-text">écouter</span> une tasse.</h2>
-        <p class="section__sub">Découvrez les secrets du thé en petit comité, dans nos boutiques lyonnaises.</p>
-      </div>
-      <div class="atelier-hero glass tilt reveal">
-        <div class="atelier-hero__main">
-          <span class="atelier__tag">Atelier dégustation</span>
-          <h3>13 thés d'origine</h3>
-          <p>Treize thés d'origine à déguster, avec les conseils et anecdotes d'un passionné. Un tour du monde des jardins, tasse après tasse.</p>
-        </div>
-        <ul class="atelier-hero__facts">
-          <li><strong>Lundi</strong><span>10h00</span></li>
-          <li><strong>Jeudi</strong><span>17h30</span></li>
-          <li><strong>48 €</strong><span>par adulte</span></li>
-          <li><strong>Groupe</strong><span>tarif dès 3 pers.</span></li>
-        </ul>
-        <p class="atelier-hero__where">Boutique Lyon Jacobins · 5 rue Confort, 69002 Lyon</p>
-      </div>
-
-      <!-- Formulaire de réservation -->
-      <form class="booking glass reveal" id="reserver" novalidate>
-        <h3>Demande de réservation</h3>
-        <div class="booking__grid">
-          <label>Nom
-            <input type="text" name="nom" required autocomplete="name">
-          </label>
-          <label>E-mail
-            <input type="email" name="email" required autocomplete="email">
-          </label>
-          <label>Téléphone
-            <input type="tel" name="tel" autocomplete="tel">
-          </label>
-          <label>Créneau
-            <select name="creneau" id="creneauSelect" required>
-              <option value="">Choisir…</option>
-              <option value="1">Lundi · 10h00</option>
-              <option value="4">Jeudi · 17h30</option>
-            </select>
-          </label>
-          <label>Date
-            <input type="date" name="date" required>
-          </label>
-          <label>Participants
-            <input type="number" name="participants" min="1" max="12" value="2" required>
-          </label>
-        </div>
-        <button class="btn btn--gold" type="submit">Envoyer la demande</button>
-        <p class="booking__msg" id="bookingMsg" role="status" aria-live="polite"></p>
-      </form>
     </section>
 
     <!-- BOUTIQUES -->
@@ -200,7 +263,6 @@
     <a class="link" href="https://www.instagram.com/dammannfreres_lyon/" target="_blank" rel="noopener">Instagram · @dammannfreres_lyon</a>
     <p class="footer__copy">© <span id="year"></span> Dammann Frères Lyon</p>
   </footer>
-
 
   <!-- LE VOYAGE (immersion 3D) -->
   <div class="voyage" id="voyage" role="dialog" aria-modal="true" aria-labelledby="voyageTitle" hidden>

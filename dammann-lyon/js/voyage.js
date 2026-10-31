@@ -278,7 +278,7 @@
     switch (ing.type) {
       case "leaf":
         geo = R.smallLeafGeo;
-        mat = new THREE.MeshStandardMaterial({ color: family.leaf, roughness: 0.6, metalness: 0.15, side: THREE.DoubleSide });
+        mat = new THREE.MeshStandardMaterial({ color: ing.colors ? 0xffffff : family.leaf, roughness: 0.6, metalness: 0.15, side: THREE.DoubleSide });
         count = 34; scale = 1.1; break;
       case "pearl":
         geo = new THREE.DodecahedronGeometry(0.16, 1);
@@ -319,6 +319,19 @@
       case "berry":
         geo = new THREE.SphereGeometry(0.13, 16, 12);
         mat = new THREE.MeshPhysicalMaterial({ color: 0x6e0f2c, roughness: 0.2, clearcoat: 1 }); count = 24; break;
+      case "drop":
+        geo = new THREE.SphereGeometry(0.2, 24, 16);
+        mat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.05, clearcoat: 1, transmission: 0.3, transparent: true, opacity: 0.9 });
+        count = 30; break;
+      case "matcha":
+        geo = new THREE.IcosahedronGeometry(0.07, 0);
+        mat = new THREE.MeshStandardMaterial({ color: 0x7cb342, roughness: 1, emissive: 0x1a2a08 }); count = 160; scale = 1; break;
+      case "cheese":
+        geo = new THREE.CylinderGeometry(0.45, 0.45, 0.3, 24, 1, false, 0, Math.PI / 3);
+        mat = new THREE.MeshStandardMaterial({ color: 0xf1d27a, roughness: 0.7 }); count = 8; break;
+      case "chocolate":
+        geo = new THREE.BoxGeometry(0.5, 0.08, 0.35);
+        mat = new THREE.MeshPhysicalMaterial({ color: 0x3b1f12, roughness: 0.35, clearcoat: 0.6 }); count = 10; break;
       default:
         geo = new THREE.IcosahedronGeometry(0.15, 0);
         mat = new THREE.MeshStandardMaterial({ color: family.accent });
@@ -334,6 +347,11 @@
       });
     }
     mesh.userData.items = data;
+    if (ing.colors) {
+      var c = new THREE.Color();
+      for (var ci = 0; ci < count; ci++) mesh.setColorAt(ci, c.set(ing.colors[ci % ing.colors.length]));
+      mesh.instanceColor.needsUpdate = true;
+    }
     return mesh;
   }
 
@@ -492,6 +510,32 @@
   /* =======================================================
      Contenu HTML des 4 étapes
      ======================================================= */
+  function renderAtelier(item) {
+    var price = DATA.ATELIER_PRICE;
+    function block(st, i) {
+      var html = '<p class="eyebrow">Étape ' + (i + 1) + " · " + esc(item.stepLabels[i]) + "</p>";
+      html += i === 0 ? '<h2 id="voyageTitle">' + esc(st.title) + "</h2>" : "<h3>" + esc(st.title) + "</h3>";
+      if (st.lead) html += '<p class="vstep__lead">' + esc(st.lead) + "</p>";
+      if (st.text) html += "<p>" + esc(st.text) + "</p>";
+      if (st.list) html += '<ul class="vstep__ings">' + st.list.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>";
+      return html;
+    }
+    var s = item.steps;
+    stepsEl.innerHTML =
+      '<section class="vstep vstep--intro">' + block(s[0], 0) + '<p class="vstep__hint">Faites défiler pour vivre l\'atelier</p></section>' +
+      '<section class="vstep vstep--right">' + block(s[1], 1) + "</section>" +
+      '<section class="vstep">' + block(s[2], 2) + "</section>" +
+      '<section class="vstep vstep--final">' + block(s[3], 3) +
+        '<ul class="vstep__notes">' + item.highlights.map(function (h) { return "<li>" + esc(h) + "</li>"; }).join("") + "</ul>" +
+        '<p class="vstep__price">' + price + " € l'atelier · à vivre ou à offrir</p>" +
+        '<div class="vstep__cta">' +
+          '<a href="#reserver" class="btn btn--gold" data-close data-pick="' + item.id + '">Réserver cet atelier</a>' +
+          '<a href="#offrir" class="btn btn--ghost" data-close>Offrir un atelier</a>' +
+        "</div>" +
+      "</section>";
+    bindCtas();
+  }
+
   function render(item, family, isProduct) {
     var ingList = item.ingredients.map(function (i) { return "<li>" + esc(i.label) + "</li>"; }).join("");
     var notes = item.notes.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("");
@@ -532,15 +576,21 @@
         "</div>" +
       "</section>";
 
+    bindCtas();
+    counted = false;
+  }
+
+  function bindCtas() {
     stepsEl.querySelectorAll("[data-close]").forEach(function (a) {
       a.addEventListener("click", function (e) {
         e.preventDefault();
         var target = a.getAttribute("href");
+        var pick = a.getAttribute("data-pick");
+        if (pick) document.dispatchEvent(new CustomEvent("atelier:pick", { detail: pick }));
         close();
         setTimeout(function () { document.querySelector(target).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }); }, 350);
       });
     });
-    counted = false;
   }
 
   /* ---------- Défilement dans le voyage ---------- */
@@ -555,6 +605,7 @@
     if (!counted && active >= 2) {
       counted = true;
       var el = stepsEl.querySelector("[data-count]");
+      if (!el) return;
       var to = +el.getAttribute("data-count"), start = performance.now();
       (function tick(now) {
         var k = clamp01((now - start) / 1200);
@@ -583,7 +634,12 @@
 
   function open(kind, id) {
     var item, family, isProduct = kind === "product";
-    if (isProduct) {
+    var isAtelier = kind === "atelier";
+    if (isAtelier) {
+      item = DATA.ATELIERS.filter(function (a) { return a.id === id; })[0];
+      if (!item) return;
+      family = item; // l'atelier porte sa propre palette
+    } else if (isProduct) {
       item = DATA.PRODUCTS.filter(function (p) { return p.id === id; })[0];
       if (!item) return;
       family = DATA.FAMILIES[item.family];
@@ -595,7 +651,9 @@
     lastFocus = document.activeElement;
     overlay.style.setProperty("--accent", family.accent);
     overlay.style.setProperty("--liquor", family.liquor);
-    render(item, family, isProduct);
+    if (isAtelier) { renderAtelier(item); counted = false; } else render(item, family, isProduct);
+    var labels = isAtelier ? item.stepLabels : ["Origine", "Ingrédients", "Infusion", "La tasse"];
+    stepDots.forEach(function (d, i) { d.querySelector("button").textContent = labels[i]; });
 
     overlay.hidden = false;
     overlay.scrollTop = 0;

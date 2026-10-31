@@ -261,14 +261,14 @@ main, .footer, .nav { position: relative; z-index: 2; }
 .booking h3 { font-size: 36px; margin-bottom: 28px; }
 .booking__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 22px; margin-bottom: 28px; }
 .booking label { min-width: 0; display: flex; flex-direction: column; gap: 8px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--texte-doux); }
-.booking input, .booking select {
+.booking input, .booking select, .booking textarea {
   font: 300 16px var(--sans); color: var(--creme);
   background: rgba(0,0,0,.35); border: 1px solid rgba(232,211,163,.18); border-radius: 12px;
   width: 100%; min-width: 0;
   padding: 14px 16px; transition: border-color .3s, box-shadow .3s;
   color-scheme: dark;
 }
-.booking input:focus, .booking select:focus { border-color: var(--or); box-shadow: 0 0 0 4px rgba(201,164,92,.12); outline: none; }
+.booking input:focus, .booking select:focus, .booking textarea:focus { border-color: var(--or); box-shadow: 0 0 0 4px rgba(201,164,92,.12); outline: none; }
 .booking .is-invalid { border-color: #c2604f; }
 .booking__msg { margin: 18px 0 0; min-height: 1.5em; color: var(--or-clair); }
 
@@ -334,6 +334,108 @@ body::before {
 .atelier-hero__facts strong { display: block; font-family: var(--serif); font-size: 30px; font-weight: 500; color: var(--or); line-height: 1.1; }
 .atelier-hero__facts span { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--texte-doux); }
 .atelier-hero__where { grid-column: 1 / -1; margin: 0; font-size: 13px; color: var(--texte-doux); border-top: 1px solid rgba(232,211,163,.1); padding-top: 18px; }
+
+/* ---------- Hero ateliers ---------- */
+.hero__price { color: var(--or-clair); font-weight: 400; white-space: nowrap; }
+
+/* ---------- Cartes ateliers ---------- */
+.ateliers-list { display: grid; gap: 26px; perspective: 1400px; }
+.atelier-card { display: grid; grid-template-columns: minmax(220px, 360px) 1fr; gap: clamp(24px, 4vw, 56px); padding: clamp(24px, 3vw, 44px); align-items: center; }
+.atelier-card:hover { border-color: var(--accent); }
+.atelier-card__visual { position: relative; aspect-ratio: 1; display: grid; place-items: center; }
+.atelier-card__visual::before {
+  content: ""; position: absolute; inset: 16%; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--liquor) 80%, #fff 20%), var(--liquor) 45%, #0b0b0c 75%);
+  box-shadow: 0 0 90px -10px var(--accent);
+}
+.atelier-card__visual::after { content: ""; position: absolute; inset: 2%; border-radius: 50%; border: 1px dashed color-mix(in srgb, var(--accent) 50%, transparent); }
+.orbit { position: absolute; inset: 0; animation: spin 26s linear infinite; }
+.orbit span {
+  position: absolute; left: 50%; top: 50%; width: 15%; aspect-ratio: 1; border-radius: 50%;
+  margin: -7.5% 0 0 -7.5%;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.6), var(--c) 40%, color-mix(in srgb, var(--c) 50%, #000) 100%);
+  box-shadow: 0 0 24px -2px var(--c);
+  transform: rotate(calc(360deg / var(--n) * var(--i))) translateY(-215%) rotate(calc(-360deg / var(--n) * var(--i)));
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.atelier-card__num { position: absolute; top: 0; left: 0; font-family: var(--serif); font-size: 44px; color: transparent; -webkit-text-stroke: 1px var(--accent); }
+.atelier-card h3 { font-size: clamp(34px, 4vw, 54px); margin-bottom: 14px; }
+.atelier-card__short { margin: 0 0 18px; color: var(--texte); max-width: 560px; }
+.atelier-card__who { margin: 0 0 22px; font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--accent); }
+.atelier-card__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* ---------- Quiz ---------- */
+.quiz { max-width: 860px; padding: clamp(28px, 4vw, 52px); position: relative; overflow: hidden; }
+.quiz__progress { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,.06); }
+.quiz__progress span { display: block; height: 100%; background: linear-gradient(90deg, var(--or), var(--live, var(--or-clair))); transform-origin: left; transform: scaleX(0); transition: transform .6s var(--ease); }
+.quiz__count { margin: 0 0 10px; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--or); }
+.quiz__q { font-size: clamp(30px, 3.6vw, 46px); margin-bottom: 28px; }
+.quiz__answers { display: grid; gap: 12px; }
+.quiz__answer {
+  display: flex; align-items: center; gap: 18px; text-align: left; width: 100%;
+  font: 300 17px/1.4 var(--sans); color: var(--creme);
+  padding: 18px 22px; border-radius: 16px; cursor: pointer;
+  background: rgba(0,0,0,.25); border: 1px solid var(--glass-bord);
+  transition: border-color .3s, background .3s, transform .4s var(--ease);
+}
+.quiz__answer:hover, .quiz__answer:focus-visible { border-color: var(--or); background: rgba(201,164,92,.08); transform: translateX(6px); }
+.quiz__letter { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--or); color: var(--or); font-family: var(--serif); font-size: 18px; }
+.quiz__back { margin-top: 22px; background: none; border: 0; color: var(--texte-doux); font: 400 13px var(--sans); letter-spacing: .06em; cursor: pointer; padding: 6px 0; }
+.quiz__back:hover { color: var(--or-clair); }
+.quiz__result .quiz__q { color: var(--accent); }
+.quiz__result p { color: var(--texte); }
+#quizBody.is-in { animation: quizIn .6s var(--ease); }
+@keyframes quizIn { from { opacity: 0; transform: translateY(18px); } }
+
+/* ---------- Offrir ---------- */
+.gift { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px clamp(32px, 5vw, 80px); align-items: center; }
+.gift__intro .section__head { margin-bottom: 32px; }
+.gift__steps { list-style: none; counter-reset: g; padding: 0; margin: 0 0 22px; display: grid; gap: 16px; }
+.gift__steps li { counter-increment: g; position: relative; padding-left: 58px; color: var(--texte); }
+.gift__steps li::before {
+  content: counter(g); position: absolute; left: 0; top: -4px; width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center; border: 1px solid var(--or); color: var(--or); font-family: var(--serif); font-size: 20px;
+}
+.gift__steps strong { color: var(--creme); font-weight: 500; }
+.gift__note { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--or-clair); margin: 0; }
+.gift__card-wrap { perspective: 1200px; display: grid; place-items: center; padding: 20px 0; }
+.gift-card {
+  --sx: 30%;
+  width: min(100%, 400px); aspect-ratio: 1.6; border-radius: 22px;
+  transform-style: preserve-3d; transition: transform .5s var(--ease);
+  animation: float 6s ease-in-out infinite;
+}
+.gift-card__face {
+  position: absolute; inset: 0; border-radius: inherit; overflow: hidden;
+  padding: 26px 28px; display: flex; flex-direction: column;
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(232,211,163,.22), transparent 55%),
+    linear-gradient(145deg, #1b1712, #0c0b0a 60%);
+  border: 1px solid rgba(232,211,163,.45);
+  box-shadow: 0 40px 80px -30px rgba(0,0,0,.9), 0 0 60px -20px rgba(201,164,92,.5), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.gift-card__face .nav__mark { width: 38px; height: 38px; font-size: 22px; }
+.gift-card__label { margin: auto 0 4px; font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: var(--or); }
+.gift-card__title { margin: 0; font-family: var(--serif); font-size: 28px; color: var(--creme); line-height: 1.1; }
+.gift-card__for { margin: 6px 0 0; font-size: 14px; color: var(--texte); }
+.gift-card__for span { color: var(--or-clair); font-family: var(--serif); font-style: italic; font-size: 18px; }
+.gift-card__price { position: absolute; top: 22px; right: 26px; margin: 0; font-family: var(--serif); font-size: 34px; color: var(--or); }
+.gift-card__shine { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent calc(var(--sx) - 18%), rgba(255,240,200,.18) var(--sx), transparent calc(var(--sx) + 18%)); }
+@keyframes float { 50% { translate: 0 -10px; } }
+.gift__form { grid-column: 1 / -1; margin-top: 0; }
+.gift__total { margin: 0 0 22px; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--texte-doux); }
+.gift__total strong { font-family: var(--serif); font-size: 30px; letter-spacing: 0; color: var(--or); text-transform: none; margin-left: 8px; }
+
+/* Formulaires : compléments */
+.booking .eyebrow { margin-bottom: 8px; }
+.booking__grid--2 { grid-template-columns: repeat(2, 1fr); }
+.booking .span-2 { grid-column: span 2; }
+.booking .span-3 { grid-column: 1 / -1; }
+.booking textarea { resize: vertical; min-height: 90px; }
+.booking .check { flex-direction: row; align-items: center; gap: 12px; letter-spacing: .06em; text-transform: none; font-size: 15px; color: var(--creme); cursor: pointer; }
+.booking .check input { width: 20px; height: 20px; accent-color: var(--or); padding: 0; }
+.booking__hint { margin: -10px 0 22px; font-size: 13px; color: var(--texte-doux); }
+.gift-code[hidden] { display: none; }
 
 /* ---------- Le Voyage ---------- */
 body.voyage-open { overflow: hidden; }
@@ -405,6 +507,8 @@ body.voyage-open { overflow: hidden; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
+  .atelier-card, .gift { grid-template-columns: 1fr; }
+  .atelier-card__visual { max-width: 260px; }
   .product, .atelier-hero { grid-template-columns: 1fr; }
   .product__visual { max-width: 260px; }
   .cards, .cards--2 { grid-template-columns: 1fr 1fr; }
@@ -422,7 +526,9 @@ body.voyage-open { overflow: hidden; }
   }
   .nav.is-open .nav__links { opacity: 1; visibility: visible; }
   .nav__name { font-size: 17px; }
-  .cards, .cards--2, .booking__grid { grid-template-columns: 1fr; }
+  .cards, .cards--2, .booking__grid, .booking__grid--2 { grid-template-columns: 1fr; }
+  .booking .span-2 { grid-column: auto; }
+  .quiz__answer { font-size: 15px; padding: 14px 16px; }
   .hero { align-items: flex-end; padding-bottom: 120px; }
   .tea { min-height: 220px; }
   .stat strong { font-size: 42px; min-width: 96px; }
