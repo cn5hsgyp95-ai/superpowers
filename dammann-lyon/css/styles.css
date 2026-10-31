@@ -233,8 +233,16 @@ main, .footer, .nav { position: relative; z-index: 2; }
   transition: transform .6s var(--ease), box-shadow .6s;
 }
 .tea:hover .tea__orb { transform: translateZ(70px) scale(1.12); box-shadow: 0 0 80px 0 var(--hue), inset 0 -10px 30px rgba(0,0,0,.6); }
-.tea h3 { font-size: 32px; margin-bottom: 10px; transform: translateZ(30px); }
-.tea p { margin: 0; color: var(--texte-doux); transform: translateZ(20px); }
+.tea { font: inherit; color: inherit; text-align: left; cursor: pointer; width: 100%; }
+.tea__name { display: block; font-family: var(--serif); font-size: 32px; color: var(--creme); line-height: 1.05; margin-bottom: 10px; transform: translateZ(30px); }
+.tea__text { display: block; color: var(--texte-doux); transform: translateZ(20px); }
+.tea__go {
+  display: inline-flex; gap: 8px; align-items: center; margin-top: 18px;
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
+  opacity: .7; transition: opacity .4s, gap .4s var(--ease);
+}
+.tea:hover .tea__go, .tea:focus-visible .tea__go { opacity: 1; gap: 14px; }
+.tea:hover { border-color: var(--accent); }
 
 /* Ateliers */
 .atelier { padding: 36px 32px; display: flex; flex-direction: column; gap: 14px; }
@@ -285,6 +293,111 @@ main, .footer, .nav { position: relative; z-index: 2; }
 .footer__brand small { font-family: var(--sans); font-size: 12px; color: var(--texte-doux); }
 .footer__copy { margin: 0; font-size: 12px; color: var(--texte-doux); }
 
+/* ---------- Palette vivante ---------- */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(60% 60% at 70% 40%, var(--live, transparent), transparent 70%);
+  opacity: .16; transition: opacity .8s;
+}
+.section__note { color: var(--texte-doux); font-size: 13px; letter-spacing: .06em; margin: 28px 0 0; }
+
+/* ---------- Références ---------- */
+.products { display: grid; gap: 26px; perspective: 1400px; }
+.product { display: grid; grid-template-columns: minmax(200px, 340px) 1fr; gap: clamp(24px, 4vw, 56px); padding: clamp(24px, 3vw, 40px); align-items: center; }
+.product__visual { position: relative; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; }
+.product__cup {
+  width: 62%; aspect-ratio: 1; border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 32%, rgba(255,255,255,.45), transparent 18%),
+    radial-gradient(circle at 50% 50%, var(--liquor) 0 55%, color-mix(in srgb, var(--liquor) 40%, #000) 70%, #f3ead8 71% 80%, #c9a45c 81% 83%, transparent 84%);
+  box-shadow: 0 0 80px -10px var(--accent);
+  transform: translateZ(60px);
+  animation: swirl 14s linear infinite;
+}
+.product__ring { position: absolute; inset: 4%; border-radius: 50%; border: 1px dashed color-mix(in srgb, var(--accent) 60%, transparent); animation: swirl 40s linear infinite reverse; }
+.product__num { position: absolute; top: 4%; left: 4%; font-family: var(--serif); font-size: 44px; color: transparent; -webkit-text-stroke: 1px var(--accent); }
+@keyframes swirl { to { transform: translateZ(60px) rotate(360deg); } }
+.product__family { margin: 0 0 8px; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); }
+.product h3 { font-size: clamp(34px, 4vw, 52px); margin-bottom: 12px; }
+.product__body > p:not(.product__family) { color: var(--texte); margin: 0 0 18px; max-width: 520px; }
+.product__chips { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-wrap: wrap; gap: 8px; }
+.product__chips li { font-size: 12px; padding: 6px 12px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); color: var(--creme); }
+.product:hover { border-color: var(--accent); }
+
+/* ---------- Atelier réel ---------- */
+.atelier-hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px 48px; padding: clamp(28px, 4vw, 48px); align-items: center; }
+.atelier-hero__main { display: flex; flex-direction: column; gap: 14px; }
+.atelier-hero h3 { font-size: clamp(38px, 4.4vw, 58px); }
+.atelier-hero__main p { margin: 0; color: var(--texte); }
+.atelier-hero__facts { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.atelier-hero__facts li { padding: 18px 20px; border-radius: 16px; border: 1px solid var(--glass-bord); background: rgba(0,0,0,.25); }
+.atelier-hero__facts strong { display: block; font-family: var(--serif); font-size: 30px; font-weight: 500; color: var(--or); line-height: 1.1; }
+.atelier-hero__facts span { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--texte-doux); }
+.atelier-hero__where { grid-column: 1 / -1; margin: 0; font-size: 13px; color: var(--texte-doux); border-top: 1px solid rgba(232,211,163,.1); padding-top: 18px; }
+
+/* ---------- Le Voyage ---------- */
+body.voyage-open { overflow: hidden; }
+.voyage {
+  --accent: var(--or); --liquor: #8a3b12;
+  position: fixed; inset: 0; z-index: 90;
+  overflow-y: auto; overscroll-behavior: contain;
+  background: #070707;
+  opacity: 0; transition: opacity .45s var(--ease);
+}
+.voyage.is-open { opacity: 1; }
+.voyage[hidden] { display: none; }
+.voyage__canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+.voyage__veil { position: fixed; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.55), transparent 55%); }
+.voyage.is-flat { background: radial-gradient(70% 60% at 70% 40%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%), #0b0b0c; }
+.voyage__bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 3;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 18px clamp(16px, 4vw, 48px);
+  background: linear-gradient(rgba(0,0,0,.55), transparent);
+}
+.voyage__nav { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; counter-reset: s; }
+.voyage__nav button {
+  font: 400 11px var(--sans); letter-spacing: .18em; text-transform: uppercase;
+  color: var(--texte-doux); background: none; border: 1px solid transparent; border-radius: 999px;
+  padding: 8px 14px; cursor: pointer; transition: color .3s, border-color .3s;
+}
+.voyage__nav li.is-done button { color: var(--creme); }
+.voyage__nav li.is-active button { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
+.voyage__close {
+  font: 400 12px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--creme);
+  background: rgba(255,255,255,.05); border: 1px solid var(--glass-bord); border-radius: 999px;
+  padding: 10px 18px; cursor: pointer; backdrop-filter: blur(8px);
+}
+.voyage__close:hover { border-color: var(--accent); color: var(--accent); }
+.voyage__progress { position: fixed; left: 0; right: 0; bottom: 0; height: 2px; z-index: 3; background: rgba(255,255,255,.06); }
+.voyage__progress span { display: block; height: 100%; background: linear-gradient(90deg, var(--or), var(--accent)); transform-origin: left; transform: scaleX(0); }
+.voyage__steps { position: relative; z-index: 2; }
+.vstep {
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  max-width: 560px; padding: 110px clamp(16px, 6vw, 96px) 80px;
+  opacity: .25; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.vstep.is-active { opacity: 1; transform: none; }
+.vstep--right { margin-left: auto; text-align: right; align-items: flex-end; }
+.vstep .eyebrow { color: var(--accent); }
+.vstep h2 { font-size: clamp(48px, 7vw, 96px); font-weight: 400; margin-bottom: 18px; }
+.vstep h3 { font-size: clamp(36px, 4.6vw, 60px); font-weight: 400; margin-bottom: 22px; }
+.vstep p { margin: 0 0 14px; color: var(--texte); }
+.vstep__lead { font-family: var(--serif); font-size: clamp(22px, 2.2vw, 28px); color: var(--creme) !important; font-style: italic; }
+.vstep__hint { margin-top: 26px !important; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--accent) !important; }
+.vstep__ings, .vstep__notes { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.vstep__ings li { font-family: var(--serif); font-size: clamp(24px, 2.6vw, 34px); color: var(--creme); }
+.vstep__ings li::after { content: " ·"; color: var(--accent); }
+.vstep__notes { flex-direction: row; flex-wrap: wrap; margin-bottom: 22px; }
+.vstep__notes li { padding: 8px 16px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent); color: var(--creme); }
+.vstep__infuse { display: flex; gap: 40px; margin-bottom: 18px; }
+.vstep__infuse strong { font-family: var(--serif); font-size: clamp(44px, 5vw, 68px); font-weight: 500; color: var(--accent); line-height: 1; }
+.vstep__infuse span { display: block; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--texte-doux); margin-top: 6px; }
+.vstep__small { font-size: 13px; color: var(--texte-doux) !important; }
+.vstep__price { font-size: 14px; letter-spacing: .06em; color: var(--or-clair) !important; }
+.vstep__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+
 /* ---------- Révélation au défilement ---------- */
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
 .reveal.is-visible { opacity: 1; transform: none; }
@@ -292,6 +405,8 @@ main, .footer, .nav { position: relative; z-index: 2; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
+  .product, .atelier-hero { grid-template-columns: 1fr; }
+  .product__visual { max-width: 260px; }
   .cards, .cards--2 { grid-template-columns: 1fr 1fr; }
   .cards--3 { grid-template-columns: 1fr; }
   .maison__grid { grid-template-columns: 1fr; }
@@ -311,6 +426,10 @@ main, .footer, .nav { position: relative; z-index: 2; }
   .hero { align-items: flex-end; padding-bottom: 120px; }
   .tea { min-height: 220px; }
   .stat strong { font-size: 42px; min-width: 96px; }
+  .voyage__nav { display: none; }
+  .vstep, .vstep--right { text-align: left; align-items: flex-start; margin-left: 0; justify-content: flex-end; padding-bottom: 60px; }
+  .voyage__veil { background: linear-gradient(0deg, rgba(0,0,0,.75), transparent 60%); }
+  .atelier-hero__facts strong { font-size: 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -285,8 +285,25 @@
   var clock = new THREE.Clock();
   var time = 0;
 
+  /* ---------- API : pause & palette vivante ---------- */
+  var paused = false;
+  var accentTarget = new THREE.Color(0xe8b860);
+  var rimBase = new THREE.Color(0x4fa38a);
+  var ringTarget = new THREE.Color(0x4fa38a);
+  window.DammannScene = {
+    pause: function (v) { paused = !!v; if (!paused) clock.getDelta(); },
+    setAccent: function (hex) {
+      accentTarget.set(hex || 0xe8b860);
+      ringTarget.set(hex || 0x4fa38a);
+    }
+  };
+
   function frame() {
+    if (paused) { requestAnimationFrame(frame); return; }
     var dt = Math.min(clock.getDelta(), 0.05);
+    glow.color.lerp(accentTarget, 0.04);
+    ring2.material.color.lerp(ringTarget, 0.04);
+    rim.color.copy(rimBase).lerp(accentTarget, 0.5);
     if (!reduceMotion) time += dt;
 
     mouse.x += (mouse.tx - mouse.x) * 0.05;

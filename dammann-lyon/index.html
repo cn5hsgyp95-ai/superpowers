@@ -32,6 +32,7 @@
     <nav class="nav__links" id="navLinks" aria-label="Navigation principale">
       <a href="#maison">La Maison</a>
       <a href="#thes">Nos thés</a>
+      <a href="#references">Références</a>
       <a href="#ateliers">Ateliers</a>
       <a href="#boutiques">Boutiques</a>
       <a href="#reserver" class="btn btn--gold btn--sm">Réserver</a>
@@ -57,8 +58,8 @@
           pour apprendre à les déguster.
         </p>
         <div class="hero__cta reveal">
-          <a href="#ateliers" class="btn btn--gold">Réserver un atelier</a>
-          <a href="#boutiques" class="btn btn--ghost">Nos boutiques</a>
+          <a href="#references" class="btn btn--gold">Commencer le voyage</a>
+          <a href="#ateliers" class="btn btn--ghost">Réserver un atelier</a>
         </div>
       </div>
       <a href="#maison" class="scroll-hint" aria-label="Défiler vers la suite">
@@ -91,40 +92,21 @@
       <div class="section__head reveal">
         <p class="eyebrow">Nos univers</p>
         <h2>Six familles, <span class="gold-text">mille nuances</span>.</h2>
-        <p class="section__sub">Survolez une famille pour la découvrir.</p>
+        <p class="section__sub">Survolez une famille pour voir sa couleur, cliquez pour partir en voyage.</p>
       </div>
-      <div class="cards">
-        <article class="tea tilt reveal" style="--hue:#7a3b1d">
-          <div class="tea__orb"></div>
-          <h3>Thés noirs</h3>
-          <p>Corsés, maltés ou fumés : la profondeur des grands jardins.</p>
-        </article>
-        <article class="tea tilt reveal" style="--hue:#4f8a4a">
-          <div class="tea__orb"></div>
-          <h3>Thés verts</h3>
-          <p>Fraîcheur végétale et notes iodées, de la Chine au Japon.</p>
-        </article>
-        <article class="tea tilt reveal" style="--hue:#b07a2c">
-          <div class="tea__orb"></div>
-          <h3>Oolongs</h3>
-          <p>Entre vert et noir, des arômes floraux et boisés.</p>
-        </article>
-        <article class="tea tilt reveal" style="--hue:#d8c9a3">
-          <div class="tea__orb"></div>
-          <h3>Thés blancs</h3>
-          <p>Délicats et précieux, à peine transformés.</p>
-        </article>
-        <article class="tea tilt reveal" style="--hue:#b0405a">
-          <div class="tea__orb"></div>
-          <h3>Infusions</h3>
-          <p>Fleurs, fruits et plantes, sans théine.</p>
-        </article>
-        <article class="tea tilt reveal" style="--hue:#a8452a">
-          <div class="tea__orb"></div>
-          <h3>Rooibos</h3>
-          <p>Doux et gourmand, à savourer à toute heure.</p>
-        </article>
+      <div class="cards" id="familyCards"></div>
+      <p class="section__note reveal">Chaque famille ouvre un voyage en 3D : origine, ingrédients, infusion, dégustation.</p>
+    </section>
+
+
+    <!-- RÉFÉRENCES -->
+    <section class="section references" id="references">
+      <div class="section__head reveal">
+        <p class="eyebrow">Les signatures de la Maison</p>
+        <h2>Entrez <span class="gold-text">dans la tasse</span>.</h2>
+        <p class="section__sub">Chaque référence est un voyage. Choisissez la vôtre.</p>
       </div>
+      <div class="products" id="productCards"></div>
     </section>
 
     <!-- ATELIERS -->
@@ -134,37 +116,19 @@
         <h2>Apprenez à <span class="gold-text">écouter</span> une tasse.</h2>
         <p class="section__sub">Découvrez les secrets du thé en petit comité, dans nos boutiques lyonnaises.</p>
       </div>
-      <div class="cards cards--3">
-        <article class="atelier glass tilt reveal">
-          <span class="atelier__tag">Découverte</span>
-          <h3>Initiation au thé</h3>
-          <p>Les familles, l'origine des feuilles et les bons gestes d'infusion.</p>
-          <ul class="atelier__meta">
-            <li>Durée : XX min</li>
-            <li>Tarif : XX €</li>
-          </ul>
-          <a href="#reserver" class="btn btn--ghost btn--sm" data-atelier="Initiation au thé">Réserver</a>
-        </article>
-        <article class="atelier glass tilt reveal atelier--featured">
-          <span class="atelier__tag">Signature</span>
-          <h3>Voyage aromatique</h3>
-          <p>Un tour du monde des jardins et des assemblages de la Maison.</p>
-          <ul class="atelier__meta">
-            <li>Durée : XX min</li>
-            <li>Tarif : XX €</li>
-          </ul>
-          <a href="#reserver" class="btn btn--gold btn--sm" data-atelier="Voyage aromatique">Réserver</a>
-        </article>
-        <article class="atelier glass tilt reveal">
-          <span class="atelier__tag">Gourmand</span>
-          <h3>Thé &amp; accords</h3>
-          <p>Associer le thé aux saveurs sucrées ou salées.</p>
-          <ul class="atelier__meta">
-            <li>Durée : XX min</li>
-            <li>Tarif : XX €</li>
-          </ul>
-          <a href="#reserver" class="btn btn--ghost btn--sm" data-atelier="Thé &amp; accords">Réserver</a>
-        </article>
+      <div class="atelier-hero glass tilt reveal">
+        <div class="atelier-hero__main">
+          <span class="atelier__tag">Atelier dégustation</span>
+          <h3>13 thés d'origine</h3>
+          <p>Treize thés d'origine à déguster, avec les conseils et anecdotes d'un passionné. Un tour du monde des jardins, tasse après tasse.</p>
+        </div>
+        <ul class="atelier-hero__facts">
+          <li><strong>Lundi</strong><span>10h00</span></li>
+          <li><strong>Jeudi</strong><span>17h30</span></li>
+          <li><strong>48 €</strong><span>par adulte</span></li>
+          <li><strong>Groupe</strong><span>tarif dès 3 pers.</span></li>
+        </ul>
+        <p class="atelier-hero__where">Boutique Lyon Jacobins · 5 rue Confort, 69002 Lyon</p>
       </div>
 
       <!-- Formulaire de réservation -->
@@ -177,22 +141,17 @@
           <label>E-mail
             <input type="email" name="email" required autocomplete="email">
           </label>
-          <label>Atelier
-            <select name="atelier" id="atelierSelect" required>
+          <label>Téléphone
+            <input type="tel" name="tel" autocomplete="tel">
+          </label>
+          <label>Créneau
+            <select name="creneau" id="creneauSelect" required>
               <option value="">Choisir…</option>
-              <option>Initiation au thé</option>
-              <option>Voyage aromatique</option>
-              <option>Thé &amp; accords</option>
+              <option value="1">Lundi · 10h00</option>
+              <option value="4">Jeudi · 17h30</option>
             </select>
           </label>
-          <label>Boutique
-            <select name="boutique" required>
-              <option value="">Choisir…</option>
-              <option>Lyon Jacobins — 5 rue Confort</option>
-              <option>Lyon Frères Lumière — 82 av. des Frères Lumière</option>
-            </select>
-          </label>
-          <label>Date souhaitée
+          <label>Date
             <input type="date" name="date" required>
           </label>
           <label>Participants
@@ -242,8 +201,29 @@
     <p class="footer__copy">© <span id="year"></span> Dammann Frères Lyon</p>
   </footer>
 
+
+  <!-- LE VOYAGE (immersion 3D) -->
+  <div class="voyage" id="voyage" role="dialog" aria-modal="true" aria-labelledby="voyageTitle" hidden>
+    <canvas class="voyage__canvas" aria-hidden="true"></canvas>
+    <div class="voyage__veil" aria-hidden="true"></div>
+    <div class="voyage__bar">
+      <span class="nav__mark">D</span>
+      <ol class="voyage__nav" aria-label="Étapes du voyage">
+        <li><button type="button">Origine</button></li>
+        <li><button type="button">Ingrédients</button></li>
+        <li><button type="button">Infusion</button></li>
+        <li><button type="button">La tasse</button></li>
+      </ol>
+      <button class="voyage__close" type="button" aria-label="Quitter le voyage">Quitter <span aria-hidden="true">✕</span></button>
+    </div>
+    <div class="voyage__progress" aria-hidden="true"><span></span></div>
+    <div class="voyage__steps"></div>
+  </div>
+
   <script src="vendor/three.min.js"></script>
+  <script src="js/data.js"></script>
   <script src="js/scene.js"></script>
+  <script src="js/voyage.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
