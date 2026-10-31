@@ -138,7 +138,7 @@ window.DAMMANN_DATA = (function () {
         { title: "Une plante, 6 couleurs", lead: "Une seule plante, six couleurs de thé, quinze tasses.",
           text: "Toutes les couleurs du thé naissent de la même plante, le théier. Dans cet atelier, vous découvrez comment votre palais réagit à chacune d'elles." },
         { title: "Six couleurs à explorer",
-          list: ["Blanc", "Jaune", "Vert", "Bleu-vert (oolong)", "Rouge (nos thés noirs)", "Noir (thés sombres)"] },
+          list: ["Blanc", "Jaune", "Vert", "Bleu-vert (oolong)", "Noir", "Sombre (pu-erh)"] },
         { title: "Comparer, tasse après tasse",
           text: "Les tasses sont servies en plateaux de trois. À chaque plateau, vous comparez et vous tranchez : j'aime, je n'aime pas. Plus votre avis est franc, plus votre profil sera juste." },
         { title: "Votre profil aromatique",
